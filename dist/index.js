@@ -20,16 +20,21 @@ try {
 
   console.log(`Owner: ${ctx.repo.owner}, repo: ${ctx.repo.repo}`)
   
+
+
   const result = await octokit.graphql(
     `
       {
         {
-          repository(owner: ${ctx.repo.owner}, name: ${ctx.repo.repo}) {
+          repository($owner:String!, $repo:String!) {
             url
           }
         }
       }
-    `
+    `,{
+      repo: ctx.repo.repo,
+      owner: ctx.repo.owner,
+    }
   )
 
   console.log(result)
