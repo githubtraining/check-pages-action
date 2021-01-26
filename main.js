@@ -17,24 +17,14 @@ try {
     repository(owner: $owner, name: $repo){
         url
     }
-}`
+  }`
 
-  const result = await octokit.graphql(
-    // `
-    //   {
-    //     {
-    //       repository($owner:String!, $repo:String!) {
-    //         url
-    //       }
-    //     }
-    //   }
-    // `,
-    q,
-    {
-      repo: ctx.repo.repo,
-      owner: ctx.repo.owner,
-    }
-  )
+const v = {
+  repo: ctx.repo.repo,
+  owner: ctx.repo.owner,
+}
+
+  const result = await octokit.graphql(q,v)
 
   console.log(result)
 
