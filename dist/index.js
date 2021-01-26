@@ -18,6 +18,8 @@ try {
   octokit = github.getOctokit(token)
   ctx = github.context
 
+  console.log(`Owner: ${ctx.repo.owner}, repo: ${ctx.repo.repo}`)
+  
   const result = await octokit.graphql(
     `
       {
