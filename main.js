@@ -24,7 +24,12 @@ const v = {
   repo: ctx.repo.repo,
   owner: ctx.repo.owner,
 }
-const r = await octokit.repos.listBranches(v)
+const r = await octokit.repos.listBranches({
+  repo: ctx.repo.repo,
+  owner: ctx.repo.owner
+}
+
+)
 console.log(r)
   // const result = await octokit.graphql(q,v)
 
