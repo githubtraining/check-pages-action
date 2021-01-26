@@ -1,8 +1,8 @@
 const github = require("@actions/github");
 const core = require("@actions/core");
-const yaml = require("js-yaml");
-const fs = require("fs");
-const { graphql } = require("@octokit/graphql");
+// const yaml = require("js-yaml");
+// const fs = require("fs");
+// const { graphql } = require("@octokit/graphql");
 
 async function run() {
 
