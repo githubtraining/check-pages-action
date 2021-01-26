@@ -13,18 +13,24 @@ try {
 
   console.log(`Owner: ${ctx.repo.owner}, repo: ${ctx.repo.repo}`)
   
-
+  const q = `query listRepoURL($owner:String!, $repo:String!){
+    repository(owner: $owner, name: $repo){
+        url
+    }
+}`
 
   const result = await octokit.graphql(
-    `
-      {
-        {
-          repository($owner:String!, $repo:String!) {
-            url
-          }
-        }
-      }
-    `,{
+    // `
+    //   {
+    //     {
+    //       repository($owner:String!, $repo:String!) {
+    //         url
+    //       }
+    //     }
+    //   }
+    // `,
+    q,
+    {
       repo: ctx.repo.repo,
       owner: ctx.repo.owner,
     }
