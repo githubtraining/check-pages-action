@@ -22,7 +22,7 @@ try {
     `
       {
         {
-          repository(owner: ${ctx.repo.owner.login}, name: ${ctx.repo.name}) {
+          repository(owner: ${ctx.repo.owner}, name: ${ctx.repo.repo}) {
             url
           }
         }
