@@ -9,12 +9,13 @@ async function run() {
 try {
   token = core.getInput("github-token");
   octokit = github.getOctokit(token)
+  ctx = github.context
 
   const result = await octokit.graphql(
     `
       {
         {
-          repository(owner: "hectorsector", name: "scratch") {
+          repository(owner: ${ctx.repo.owner.login}, name: ${ctx.repo.name}) {
             url
           }
         }
