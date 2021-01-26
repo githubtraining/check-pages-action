@@ -1378,7 +1378,7 @@ function _objectWithoutProperties(source, excluded) {
   return target;
 }
 
-const VERSION = "3.2.4";
+const VERSION = "3.2.5";
 
 class Octokit {
   constructor(options = {}) {
@@ -1882,7 +1882,7 @@ function withDefaults(oldDefaults, newDefaults) {
   });
 }
 
-const VERSION = "6.0.10";
+const VERSION = "6.0.11";
 
 const userAgent = `octokit-endpoint.js/${VERSION} ${universalUserAgent.getUserAgent()}`; // DEFAULTS has all properties set that EndpointOptions has, except url.
 // So we use RequestParameters and add method as additional required property.
@@ -1919,7 +1919,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 var request = __nccwpck_require__(986);
 var universalUserAgent = __nccwpck_require__(81);
 
-const VERSION = "4.5.8";
+const VERSION = "4.5.9";
 
 class GraphqlError extends Error {
   constructor(request, response) {
@@ -2032,7 +2032,7 @@ exports.withCustomRequest = withCustomRequest;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 
-const VERSION = "2.8.0";
+const VERSION = "2.8.4";
 
 /**
  * Some “list” response that can be paginated have a different response structure
@@ -2564,6 +2564,7 @@ const Endpoints = {
   },
   orgs: {
     blockUser: ["PUT /orgs/{org}/blocks/{username}"],
+    cancelInvitation: ["DELETE /orgs/{org}/invitations/{invitation_id}"],
     checkBlockedUser: ["GET /orgs/{org}/blocks/{username}"],
     checkMembershipForUser: ["GET /orgs/{org}/members/{username}"],
     checkPublicMembershipForUser: ["GET /orgs/{org}/public_members/{username}"],
@@ -2579,6 +2580,7 @@ const Endpoints = {
     list: ["GET /organizations"],
     listAppInstallations: ["GET /orgs/{org}/installations"],
     listBlockedUsers: ["GET /orgs/{org}/blocks"],
+    listFailedInvitations: ["GET /orgs/{org}/failed_invitations"],
     listForAuthenticatedUser: ["GET /user/orgs"],
     listForUser: ["GET /users/{username}/orgs"],
     listInvitationTeams: ["GET /orgs/{org}/invitations/{invitation_id}/teams"],
@@ -3060,6 +3062,7 @@ const Endpoints = {
     removeUserAccessRestrictions: ["DELETE /repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users", {}, {
       mapToData: "users"
     }],
+    renameBranch: ["POST /repos/{owner}/{repo}/branches/{branch}/rename"],
     replaceAllTopics: ["PUT /repos/{owner}/{repo}/topics", {
       mediaType: {
         previews: ["mercy"]
@@ -3201,7 +3204,7 @@ const Endpoints = {
   }
 };
 
-const VERSION = "4.5.2";
+const VERSION = "4.8.2";
 
 function endpointsToMethods(octokit, endpointsMap) {
   const newMethods = {};
@@ -3385,7 +3388,7 @@ var isPlainObject = __nccwpck_require__(32);
 var nodeFetch = _interopDefault(__nccwpck_require__(534));
 var requestError = __nccwpck_require__(190);
 
-const VERSION = "5.4.12";
+const VERSION = "5.4.13";
 
 function getBufferResponse(response) {
   return response.arrayBuffer();
