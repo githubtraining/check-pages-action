@@ -13,6 +13,7 @@ try {
 
   console.log(`Owner: ${ctx.repo.owner}, repo: ${ctx.repo.repo}`)
   
+ 
   const q = `query listRepoURL($owner:String!, $repo:String!){
     repository(owner: $owner, name: $repo){
         url
@@ -23,10 +24,11 @@ const v = {
   repo: ctx.repo.repo,
   owner: ctx.repo.owner,
 }
+const r = octokit.repos.listBranches(v)
+console.log(r)
+  // const result = await octokit.graphql(q,v)
 
-  const result = await octokit.graphql(q,v)
 
-  console.log(result)
 
 } catch (error) {
   core.setFailed(error);
