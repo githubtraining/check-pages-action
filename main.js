@@ -7,9 +7,9 @@ const { graphql } = require("@octokit/graphql");
 async function run() {
 
 try {
-  token = core.getInput("github-token");
-  octokit = github.getOctokit(token)
-  ctx = github.context
+  const token = core.getInput("github-token");
+  const octokit = github.getOctokit(token)
+  const ctx = github.context
 
   console.log(`Owner: ${ctx.repo.owner}, repo: ${ctx.repo.repo}`)
   
