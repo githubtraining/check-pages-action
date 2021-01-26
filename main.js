@@ -11,7 +11,7 @@ try {
   const octokit = github.getOctokit(token)
   const ctx = github.context
 
-  console.log(`Owner: ${ctx.repo.owner}, repo: ${ctx.repo.repo}`)
+  // console.log(`Owner: ${ctx.repo.owner}, repo: ${ctx.repo.repo}`)
   
  
   const q = `query listRepoURL($owner:String!, $repo:String!){
@@ -24,14 +24,15 @@ const v = {
   repo: ctx.repo.repo,
   owner: ctx.repo.owner,
 }
-const r = await octokit.repos.listBranches({
-  repo: ctx.repo.repo,
-  owner: ctx.repo.owner
-}
+// const r = await octokit.repos.listBranches({
+//   repo: ctx.repo.repo,
+//   owner: ctx.repo.owner
+// }
 
-)
-console.log(r)
-  // const result = await octokit.graphql(q,v)
+// )
+// console.log(r)
+  const result = await octokit.graphql(q,v)
+  console.log(result)
 
 
 
@@ -45,7 +46,7 @@ console.log(r)
 run();
 
 // Get document, or throw exception on error
-try {
-} catch (e) {
-  console.log(e);
-}
+// try {
+// } catch (e) {
+//   console.log(e);
+// }
