@@ -38,7 +38,7 @@ async function run () {
 
     console.log(`Getting pages for owner: ${ctx.repo.owner} and repo ${ctx.repo.repo}`)
     const result = await octokit.repos.getPages({
-      ...context.repo
+      ...ctx.repo
     })
 
     console.log(`The result is: ${result}`)
