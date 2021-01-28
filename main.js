@@ -1,14 +1,11 @@
 const github = require('@actions/github')
 const core = require('@actions/core')
-const { context } = require('@actions/github/lib/utils')
 
 async function run () {
   try {
     const token = core.getInput('github-token')
     const octokit = github.getOctokit(token)
     const ctx = github.context
-
-    // TODO: Use GraphQL
 
     //   const q = `query listRepoURL($owner: String!, $repo: String!) {
     //     repository(owner: $owner, name: $repo) {
@@ -21,26 +18,33 @@ async function run () {
     //     }
     //   }
     //   `
+    const q = `query getLinkedIssues($owner: String!, $repo: String!) {
+        __typename
+        repository(name: $repo, owner: $owner) {
+          pullRequest(number: 4) {
+            timelineItems(itemTypes: CONNECTED_EVENT, first: 100) {
+              nodes {
+                ... on ConnectedEvent {
+                  subject {
+                    ... on Issue {
+                      number
+                      title
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }  
+      `
 
-    // const v = {
-    //   repo: ctx.repo.repo,
-    //   owner: ctx.repo.owner,
-    // }
-    // const r = await octokit.repos.listBranches({
-    //   repo: ctx.repo.repo,
-    //   owner: ctx.repo.owner
-    // }
+    const v = {
+      repo: ctx.repo.repo,
+      owner: ctx.repo.owner
+    }
 
-    // )
-    // console.log(r)
-    // const result = await octokit.graphql(q,v)
-    // console.log(result)
-
-    console.log(`Getting pages for owner: ${ctx.repo.owner} and repo ${ctx.repo.repo}`)
-    const result = await octokit.repos.getLatestPagesBuild({
-      ...ctx.repo
-    })
-
+    const result = await octokit.graphql(q, v)
     console.log(`The result is: ${JSON.stringify(result)}`)
   } catch (error) {
     core.setFailed(error)
