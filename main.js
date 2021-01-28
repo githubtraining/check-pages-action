@@ -37,7 +37,7 @@ async function run () {
     // console.log(result)
 
     console.log(`Getting pages for owner: ${ctx.repo.owner} and repo ${ctx.repo.repo}`)
-    const result = await octokit.repos.getPages({
+    const result = await octokit.repos.listBranches({
       ...ctx.repo
     })
 
