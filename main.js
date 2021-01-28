@@ -1,5 +1,6 @@
 const github = require('@actions/github')
 const core = require('@actions/core')
+const { context } = require('@actions/github/lib/utils')
 
 async function run () {
   try {
@@ -37,8 +38,7 @@ async function run () {
 
     console.log(`Getting pages for owner: ${ctx.repo.owner} and repo ${ctx.repo.repo}`)
     const result = await octokit.repos.getPages({
-      owner: ctx.repo.owner,
-      repo: ctx.repo.repo
+      ...context.repo
     })
 
     console.log(`The result is: ${result}`)

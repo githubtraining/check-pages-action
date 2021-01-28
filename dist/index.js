@@ -7,6 +7,7 @@ module.exports =
 
 const github = __nccwpck_require__(134)
 const core = __nccwpck_require__(127)
+const { context } = __nccwpck_require__(310)
 
 async function run () {
   try {
@@ -44,8 +45,7 @@ async function run () {
 
     console.log(`Getting pages for owner: ${ctx.repo.owner} and repo ${ctx.repo.repo}`)
     const result = await octokit.repos.getPages({
-      owner: ctx.repo.owner,
-      repo: ctx.repo.repo
+      ...context.repo
     })
 
     console.log(`The result is: ${result}`)
