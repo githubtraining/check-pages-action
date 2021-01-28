@@ -35,6 +35,7 @@ async function run () {
     // const result = await octokit.graphql(q,v)
     // console.log(result)
 
+    console.log(`Getting pages for owner: ${ctx.repo.owner} and repo ${ctx.repo.repo}`)
     const result = await octokit.repos.getPages({
       owner: ctx.repo.owner,
       repo: ctx.repo.repo
