@@ -44,11 +44,11 @@ async function run () {
     // console.log(result)
 
     console.log(`Getting pages for owner: ${ctx.repo.owner} and repo ${ctx.repo.repo}`)
-    const result = await octokit.repos.listBranches({
+    const result = await octokit.repos.getLatestPagesBuild({
       ...ctx.repo
     })
 
-    console.log(`The result is: ${result}`)
+    console.log(`The result is: ${JSON.stringify(result)}`)
   } catch (error) {
     core.setFailed(error)
     console.log('uh oh')
