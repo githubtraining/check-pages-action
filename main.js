@@ -36,7 +36,7 @@ try {
   // const result = await octokit.graphql(q,v)
   // console.log(result)
 
-  const { data:branch, data:path } = await octogit.repos.getPages({
+  const { data:branch, data:path } = await octokit.repos.getPages({
     owner: ctx.repo.owner,
     repo: ctx.repo.repo
   })
