@@ -1,8 +1,5 @@
 const github = require("@actions/github");
 const core = require("@actions/core");
-// const yaml = require("js-yaml");
-// const fs = require("fs");
-// const { graphql } = require("@octokit/graphql");
 
 async function run() {
 
@@ -11,19 +8,24 @@ try {
   const octokit = github.getOctokit(token)
   const ctx = github.context
 
-  // console.log(`Owner: ${ctx.repo.owner}, repo: ${ctx.repo.repo}`)
-  
+// TODO: Use GraphQL  
  
-  const q = `query listRepoURL($owner:String!, $repo:String!){
-    repository(owner: $owner, name: $repo){
-        url
-    }
-  }`
+//   const q = `query listRepoURL($owner: String!, $repo: String!) {
+//     repository(owner: $owner, name: $repo) {
+//       deployments(first: 10, environments: "github-pages") {
+//         totalCount
+//         nodes {
+//           commitOid
+//         }
+//       }
+//     }
+//   }
+//   `
 
-const v = {
-  repo: ctx.repo.repo,
-  owner: ctx.repo.owner,
-}
+// const v = {
+//   repo: ctx.repo.repo,
+//   owner: ctx.repo.owner,
+// }
 // const r = await octokit.repos.listBranches({
 //   repo: ctx.repo.repo,
 //   owner: ctx.repo.owner
@@ -31,10 +33,15 @@ const v = {
 
 // )
 // console.log(r)
-  const result = await octokit.graphql(q,v)
-  console.log(result)
+  // const result = await octokit.graphql(q,v)
+  // console.log(result)
 
+  const { data:branch, data:path } = await octogit.repos.getPages({
+    owner: ctx.repo.owner,
+    repo: ctx.repo.repo
+  })
 
+  console.log(`The branch is ${branch} the path is ${path}`)
 
 } catch (error) {
   core.setFailed(error);
