@@ -1,61 +1,23 @@
-const github = require('@actions/github')
-const core = require('@actions/core')
+const github = require("@actions/github");
+const core = require("@actions/core");
 
-async function run () {
+async function run() {
   try {
-    const token = core.getInput('github-token')
-    const octokit = github.getOctokit(token)
-    const ctx = github.context
+    const token = core.getInput("github-token");
+    const octokit = github.getOctokit(token);
+    const ctx = github.context;
 
-    //   const q = `query listRepoURL($owner: String!, $repo: String!) {
-    //     repository(owner: $owner, name: $repo) {
-    //       deployments(first: 10, environments: "github-pages") {
-    //         totalCount
-    //         nodes {
-    //           commitOid
-    //         }
-    //       }
-    //     }
-    //   }
-    //   `
-    const q = `query getLinkedIssues($owner: String!, $repo: String!) {
-        __typename
-        repository(name: $repo, owner: $owner) {
-          pullRequest(number: 4) {
-            timelineItems(itemTypes: CONNECTED_EVENT, first: 100) {
-              nodes {
-                ... on ConnectedEvent {
-                  subject {
-                    ... on Issue {
-                      number
-                      title
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }  
-      `
-
-    const v = {
+    const { html_url: url, status, source } = await octokit.repos.getPages({
+      owner: ctx.repo.owner,
       repo: ctx.repo.repo,
-      owner: ctx.repo.owner
-    }
+    });
 
-    const result = await octokit.graphql(q, v)
-    console.log(`The result is: ${JSON.stringify(result)}`)
+    core.info(status);
+    core.info(`url: ${url}`);
+    core.info(source);
   } catch (error) {
-    core.setFailed(error)
-    console.log('uh oh')
+    core.setFailed(error);
   }
 }
 
-run()
-
-// Get document, or throw exception on error
-// try {
-// } catch (e) {
-//   console.log(e);
-// }
+run();
