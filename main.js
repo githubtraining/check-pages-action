@@ -12,7 +12,7 @@ async function run() {
       repo: ctx.repo.repo,
     });
 
-    core.info(res.data);
+    console.log(res.data);
   } catch (error) {
     core.setFailed(error);
   }
