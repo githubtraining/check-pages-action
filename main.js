@@ -23,7 +23,7 @@ async function run() {
 
     if (
       page.source.branch !== expectedBranch ||
-      page.source.path !== expectedBranch
+      page.source.path !== expectedPath
     ) {
       core.setFailed("Your page was bult from the wrong branch or path");
       core.setFailed(
