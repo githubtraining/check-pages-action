@@ -31,7 +31,7 @@ async function run() {
       );
       return;
     }
-    core.info(`Great job!  Your page can view found at: ${page.html_url}`);
+    core.info(`Great job!  Your page can be found at: ${page.html_url}`);
   } catch (error) {
     core.setFailed(error);
   }
