@@ -4292,7 +4292,7 @@ async function run() {
       repo: ctx.repo.repo,
     });
 
-    core.info(res);
+    core.info(res.data);
   } catch (error) {
     core.setFailed(error);
   }
