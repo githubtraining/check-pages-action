@@ -6,13 +6,32 @@ async function run() {
     const token = core.getInput("github-token");
     const octokit = github.getOctokit(token);
     const ctx = github.context;
+    const expectedBranch = "main";
+    const expectedPath = "/docs";
 
-    const res = await octokit.repos.getPages({
+    const { data: page } = await octokit.repos.getPages({
       owner: ctx.repo.owner,
       repo: ctx.repo.repo,
     });
 
-    console.log(res.data);
+    if (page.status !== "built") {
+      core.setFailed(
+        "Page failed to build, see the troubleshooting step for help"
+      );
+      return;
+    }
+
+    if (
+      page.source.branch !== expectedBranch ||
+      page.source.path !== expectedBranch
+    ) {
+      core.setFailed("Your page was bult from the wrong branch or path");
+      core.setFailed(
+        `Wanted branch to equal ${expectedBranch} and path to equal ${expectedPath}\nGot branch: ${expectedBranch} path: ${expectedPath}`
+      );
+      return;
+    }
+    core.info(`Great job!  Your page can view found at: ${page.html_url}`);
   } catch (error) {
     core.setFailed(error);
   }
