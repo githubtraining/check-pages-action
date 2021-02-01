@@ -4302,7 +4302,7 @@ async function run() {
         type: "issue",
         level: "fatal",
         msg:
-          "## Error:\nGitHub Pages has failed to successfully build your page.\n**[GitHub Pages Documentation](https://docs.github.com/en/github/working-with-github-pages)",
+          "## Error:\nGitHub Pages has failed to successfully build your page.\n**[GitHub Pages Documentation](https://docs.github.com/en/github/working-with-github-pages)**",
       });
       return;
     }
