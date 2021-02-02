@@ -20,8 +20,6 @@
   "homepage": "https://github.com/githubtraining/yaml-parser-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
-    "@octokit/graphql": "^4.5.8",
-    "js-yaml": "^4.0.0"
+    "@actions/github": "^4.0.0"
   }
 }
