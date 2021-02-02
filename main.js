@@ -35,7 +35,7 @@ async function run() {
       core.setOutput("report", {
         type: "issue",
         level: "warning",
-        msg: `Wanted branch to equal ${expectedBranch} and path to equal ${expectedPath}\nGot branch: ${expectedBranch} path: ${expectedPath}`,
+        msg: `Wanted branch to equal ${expectedBranch} and path to equal ${expectedPath}\nGot branch: ${page.source.branch} path: ${page.source.path}`,
       });
       return;
     }
