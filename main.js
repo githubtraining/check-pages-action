@@ -49,7 +49,7 @@ async function run() {
             isCorrect: false,
             display_type: "issues",
             level: "warning",
-            msg: "",
+            msg: "incorrect solution",
             error: {
               expected: `branch to equal ${expectedBranch} and path to equal ${expectedPath}`,
               got: `branch: ${page.source.branch} path: ${page.source.path}`,
