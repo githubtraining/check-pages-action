@@ -15,9 +15,6 @@ async function run() {
     });
 
     if (page.status !== "built") {
-      // core.setFailed(
-      //   "Page failed to build, see the troubleshooting step for help"
-      // );
       core.setOutput("reports", {
         reports: [
           {
@@ -41,14 +38,13 @@ async function run() {
       page.source.branch !== expectedBranch ||
       page.source.path !== expectedPath
     ) {
-      // core.setFailed("Your page was bult from the wrong branch or path");
       core.setOutput("reports", {
         reports: [
           {
             filename: "",
             isCorrect: false,
             display_type: "issues",
-            level: "warning",
+            level: "info",
             msg: "incorrect solution",
             error: {
               expected: `branch to equal ${expectedBranch} and path to equal ${expectedPath}`,
@@ -59,7 +55,7 @@ async function run() {
       });
       return;
     }
-    // core.info(`Great job!  Your page can be found at: ${page.html_url}`);
+
     core.setOutput("reports", {
       reports: [
         {
