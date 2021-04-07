@@ -4295,14 +4295,21 @@ async function run() {
     });
 
     if (page.status !== "built") {
-      core.setFailed(
-        "Page failed to build, see the troubleshooting step for help"
-      );
-      core.setOutput("report", {
-        type: "issue",
-        level: "fatal",
-        msg:
-          "## Error:\nGitHub Pages has failed to successfully build your page.\n**[GitHub Pages Documentation](https://docs.github.com/en/github/working-with-github-pages)**",
+      core.setOutput("reports", {
+        reports: [
+          {
+            filename: "",
+            isCorrect: false,
+            display_type: "issues",
+            level: "fatal",
+            msg: "Error",
+            error: {
+              expected: "",
+              got:
+                "## GitHub Pages has failed to successfully build your page.\n**[GitHub Pages Documentation](https://docs.github.com/en/github/working-with-github-pages)**",
+            },
+          },
+        ],
       });
       return;
     }
@@ -4311,19 +4318,38 @@ async function run() {
       page.source.branch !== expectedBranch ||
       page.source.path !== expectedPath
     ) {
-      core.setFailed("Your page was bult from the wrong branch or path");
-      core.setOutput("report", {
-        type: "issue",
-        level: "warning",
-        msg: `Wanted branch to equal ${expectedBranch} and path to equal ${expectedPath}\nGot branch: ${page.source.branch} path: ${page.source.path}`,
+      core.setOutput("reports", {
+        reports: [
+          {
+            filename: "",
+            isCorrect: false,
+            display_type: "issues",
+            level: "info",
+            msg: "incorrect solution",
+            error: {
+              expected: `branch to equal ${expectedBranch} and path to equal ${expectedPath}`,
+              got: `branch: ${page.source.branch} path: ${page.source.path}`,
+            },
+          },
+        ],
       });
       return;
     }
-    core.info(`Great job!  Your page can be found at: ${page.html_url}`);
-    core.setOutput("report", {
-      type: "actions",
-      level: "success",
-      msg: `Great job!  Your page can be found at: ${page.html_url}`,
+
+    core.setOutput("reports", {
+      reports: [
+        {
+          filename: "",
+          isCorrect: true,
+          display_type: "actions",
+          level: "info",
+          msg: `Great job!  Your page can be found at: ${page.html_url}`,
+          error: {
+            expected: "",
+            got: "",
+          },
+        },
+      ],
     });
   } catch (error) {
     core.setFailed(error);
